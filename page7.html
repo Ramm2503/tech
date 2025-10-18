@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RS-TECH - Delete Confirmation</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #fff; }
+        .sidebar { width: 220px; background: #f6f7fb; position: fixed; height: 100vh; left: 0; top: 0; padding-top: 32px;}
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar ul li { padding: 14px 30px; font-size: 18px; color: #757575;}
+        .sidebar ul li.selected, .sidebar ul li:hover { background: #0086ff; color: #fff; border-radius:24px 0 0 24px; }
+        .main-content { margin-left:220px; padding:38px 40px;}
+        .employee-container {background:#fff; border-radius:12px;padding:32px;margin-top:24px;min-height:340px;}
+        .modal-bg {position:absolute;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,.18);display:flex;justify-content:center;align-items:center;}
+        .modal {background:#fff;border-radius:14px;padding:32px 40px;box-shadow:0 8px 32px #aaa;display:flex;flex-direction:column;align-items:center;}
+        .modal-icon {font-size:60px;color:#20b0ff;padding-bottom:12px;}
+        .modal-text {font-size:1.15rem;font-weight:600;color:#444;padding-bottom:24px;}
+        .modal-buttons {display:flex;gap:12px;}
+        .modal-btn-cancel {background:#ff3f3f;color:#fff;padding:12px 38px;border:none;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+        .modal-btn-yes {background:#0086ff;color:#fff;padding:12px 38px;border:none;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;}
+        .nav-buttons { margin: 32px 0 0 0; display: flex; justify-content: center; gap: 18px;}
+        .nav-btn {padding:8px 15px;border-radius:6px;border:none;color:#fff;background:#0086ff;cursor:pointer;font-size:19px;}
+        .reset-btn {background:#20b0ff;}
+    </style>
+    <script>
+        let currentPage = 7;
+        const totalPages = 7;
+        function updatePageNumber() {document.getElementById('page-number').textContent = currentPage;}
+        function navigateToPage(page) {window.location.href = 'page' + page + '.html';}
+        function prevPage() {if (currentPage > 1) currentPage--; else currentPage = totalPages; updatePageNumber(); navigateToPage(currentPage);}
+        function nextPage() {if (currentPage < totalPages) currentPage++; else currentPage = 1; updatePageNumber(); navigateToPage(currentPage);}
+        function resetPage() {currentPage = 1; updatePageNumber(); navigateToPage(currentPage);}
+        window.onload = updatePageNumber;
+        function handleCancel() { navigateToPage(4);}
+        function handleYes() { navigateToPage(4);}
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li>Dashboard</li>
+            <li class="selected">Employee</li>
+            <li>Calendar</li>
+            <li>Messages</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="employee-container">
+            <div class="modal-bg">  
+                <div class="modal">
+                    <div class="modal-icon">&#128465;</div>
+                    <div class="modal-text">Are you sure you want to Delete</div>
+                    <div class="modal-buttons">
+                        <button class="modal-btn-cancel" onclick="handleCancel()">Cancel</button>
+                        <button class="modal-btn-yes" onclick="handleYes()">Yes</button>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">&lt;</button>
+                <span id="page-number" style="color:#0086ff;font-weight:bold;font-size:20px;padding:0 12px;">7</span>
+                <button class="nav-btn" onclick="nextPage()">&gt;</button>
+                <button class="nav-btn reset-btn" onclick="resetPage()">Reset</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

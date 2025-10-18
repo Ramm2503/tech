@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RS-TECH - Employee List</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #fff; }
+        .sidebar {
+            width: 220px; background: #f6f7fb; position: fixed; height: 100vh; left: 0; top: 0; padding-top: 32px;
+        }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar ul li { padding: 14px 30px; font-size: 18px; color: #757575; }
+        .sidebar ul li.selected, .sidebar ul li:hover { background: #0086ff; color: #fff; border-radius: 24px 0 0 24px; }
+        .main-content {
+            margin-left: 220px; padding: 38px 40px;
+        }
+        .top-bar { display: flex; justify-content: flex-end; align-items: center; }
+        .employee-container { background: #fff; border-radius: 12px; padding: 32px; margin-top: 24px; min-height: 340px; }
+        h2 { font-size: 2rem; font-weight: 700; margin-bottom: 24px; }
+        .search-bar { float: right; margin-bottom: 12px; }
+        .search-bar input { padding: 8px 12px; border-radius: 6px; border: 1px solid #eee; width: 180px; }
+        .add-btn { background: #0086ff; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; margin-left: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+        th, td { border-bottom: 1px solid #eee; padding: 12px; text-align: left; }
+        th { background: #f6f7fb; font-weight: 600; }
+        .no-records { text-align: center; font-size: 1.3rem; font-weight: 500; color: #444; padding: 48px 0; }
+        .nav-buttons { margin: 32px 0 0 0; display: flex; justify-content: center; gap: 18px; }
+        .nav-btn { padding: 8px 15px; border-radius: 6px; border: none; color: #fff; background: #0086ff; cursor: pointer; font-size: 19px; }
+        .reset-btn { background: #20b0ff; }
+    </style>
+    <script>
+        let currentPage = 1;
+        const totalPages = 7;
+        function updatePageNumber() {document.getElementById('page-number').textContent = currentPage;}
+        function navigateToPage(page) {window.location.href = 'page' + page + '.html';}
+        function prevPage() {if (currentPage > 1) currentPage--; else currentPage = totalPages; updatePageNumber(); navigateToPage(currentPage);}
+        function nextPage() {if (currentPage < totalPages) currentPage++; else currentPage = 1; updatePageNumber(); navigateToPage(currentPage);}
+        function resetPage() {currentPage = 1; updatePageNumber(); navigateToPage(currentPage);}
+        window.onload = updatePageNumber;
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li class="selected">Employee</li>
+            <li>Dashboard</li>
+            <li>Calendar</li>
+            <li>Messages</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="top-bar"></div>
+        <div class="employee-container">
+            <h2>Employee</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search" />
+                <button class="add-btn" onclick="window.location.href='page2.html'">+ Add New Employee</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Employee ID</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Project</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8" class="no-records">No records found</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="window.location.href='page1.html'">&lt;</button>
+                <button class="nav-btn" onclick="window.location.href='page2.html'">&gt;</button>
+                <button class="nav-btn reset-btn" onclick="window.location.href='page1.html'">Reset</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
